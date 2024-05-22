@@ -9,10 +9,16 @@ Version:        0.7.4
 Release:        %autorelease
 Summary:        Pure-rust library for parsing ELF files
 
+%global forgeurl https://github.com/cole14/%{name}
+%global tag v%{version}
+%forgemeta
+
 # Upstream license specification: MIT/Apache-2.0
 License:        MIT OR Apache-2.0
 URL:            https://crates.io/crates/elf
-Source:         %{crates_source}
+Source0:        %{crates_source}
+# Source coming from upstream forge only used for testing.
+Source1:        %forgesource
 
 BuildRequires:  cargo-rpm-macros >= 24
 
@@ -100,6 +106,7 @@ use the "to_str" feature of the "%{crate}" crate.
 %cargo_install
 
 %if %{with check}
+tar xf %{SOURCE1} --strip-components=1 %{topdir}/sample-objects
 %check
 %cargo_test
 %endif
