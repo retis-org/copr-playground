@@ -6,7 +6,6 @@ License:	GPLv2
 
 URL:		https://github.com/retis-org/retis
 Source:		https://github.com/retis-org/retis/archive/v%{version}/%{name}-%{version}.tar.gz
-Patch0:         0000-use_pnet_packet.patch
 
 BuildRequires:	rust-packaging
 BuildRequires:	clang
@@ -22,7 +21,7 @@ BuildRequires:	zlib-devel
 Tracing packets in the Linux networking stack, using eBPF and interfacing with control and data paths such as OpenVSwitch.
 
 %prep
-%autosetup -p1 -n %{name}-%{version}
+%autosetup -n %{name}-%{version}
 %cargo_prep
 
 %generate_buildrequires
