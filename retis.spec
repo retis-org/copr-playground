@@ -1,7 +1,7 @@
 Name:		retis
 Version:	1.4.0
 Release:	0%{?dist}
-Summary:	Tracing packets in the Linux networking stack, using eBPF and interfacing with control and data paths such as OvS or Netfilter.
+Summary:	Tracing packets in the Linux networking stack
 License:	GPLv2
 
 URL:		https://github.com/retis-org/retis
@@ -18,7 +18,8 @@ BuildRequires:	make
 BuildRequires:	zlib-devel
 
 %description
-Tracing packets in the Linux networking stack, using eBPF and interfacing with control and data paths such as OpenVSwitch.
+Tracing packets in the Linux networking stack, using eBPF and interfacing with
+control and data paths such as OpenVSwitch.
 
 %prep
 %autosetup -n %{name}-%{version}
