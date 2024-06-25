@@ -7,6 +7,8 @@ License:	GPLv2
 URL:		https://github.com/retis-org/retis
 Source:		https://github.com/retis-org/retis/archive/v%{version}/%{name}-%{version}.tar.gz
 
+ExclusiveArch:	x86_64
+
 BuildRequires:	rust-packaging
 BuildRequires:	clang
 BuildRequires:	curl
