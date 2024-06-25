@@ -1,0 +1,12 @@
+--- pcap-file-2.0.0/Cargo.toml	1970-01-01T00:00:01+00:00
++++ pcap-file-2.0.0/Cargo.toml	2024-05-28T16:33:13.622653+00:00
+@@ -53,9 +53,6 @@
+ [dependencies.thiserror]
+ version = "1.0.35"
+ 
+-[dev-dependencies.criterion]
+-version = "0.4.0"
+-
+ [dev-dependencies.glob]
+ version = "0.3.0"
+ 
