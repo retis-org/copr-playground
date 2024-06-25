@@ -1,11 +1,16 @@
 Name:		retis
-Version:	1.4.0
+Version:	1.5.0
 Release:	0%{?dist}
 Summary:	Tracing packets in the Linux networking stack
 License:	GPLv2
 
 URL:		https://github.com/retis-org/retis
+%if 0
 Source:		https://github.com/retis-org/retis/archive/v%{version}/%{name}-%{version}.tar.gz
+%else
+%global commit main
+Source:		https://github.com/retis-org/retis/archive/%{commit}/%{name}-%{commit}.tar.gz
+%endif
 
 ExclusiveArch:	x86_64
 
@@ -24,7 +29,11 @@ Tracing packets in the Linux networking stack, using eBPF and interfacing with
 control and data paths such as OpenVSwitch.
 
 %prep
+%if 0
 %autosetup -n %{name}-%{version}
+%else
+%autosetup -n %{name}-%{commit}
+%endif
 %cargo_prep
 
 %generate_buildrequires
