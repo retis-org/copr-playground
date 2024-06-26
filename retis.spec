@@ -8,7 +8,7 @@ URL:		https://github.com/retis-org/retis
 %if 0
 Source:		https://github.com/retis-org/retis/archive/v%{version}/%{name}-%{version}.tar.gz
 %else
-%global commit main
+%global commit 7777b074a5c7785484460250044fcc6f385b91b5
 Source:		https://github.com/retis-org/retis/archive/%{commit}/%{name}-%{commit}.tar.gz
 %endif
 
