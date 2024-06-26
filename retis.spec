@@ -47,7 +47,7 @@ make release %{?_smp_mflags}
 %install
 env CARGO_INSTALL_OPTS=--no-track %make_install
 install -m 0755 -d %{buildroot}%{_sysconfdir}/retis/profiles
-install -m 0644 profiles/* %{buildroot}%{_sysconfdir}/retis/profiles
+install -m 0644 retis/profiles/* %{buildroot}%{_sysconfdir}/retis/profiles
 
 %files
 %license LICENSE
