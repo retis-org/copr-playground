@@ -50,7 +50,7 @@ install -m 0755 -d %{buildroot}%{_sysconfdir}/retis/profiles
 install -m 0644 retis/profiles/* %{buildroot}%{_sysconfdir}/retis/profiles
 
 %files
-%license LICENSE
+%license retis/LICENSE
 %doc README.md
 %{_bindir}/retis
 %{_sysconfdir}/retis/profiles
