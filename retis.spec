@@ -12,6 +12,8 @@ Source:		https://github.com/retis-org/retis/archive/v%{version}/%{name}-%{versio
 Source:		https://github.com/retis-org/retis/archive/%{commit}/%{name}-%{commit}.tar.gz
 %endif
 
+Patch0:		retis-drop-rbpf.diff
+Patch1:		retis-drop-dev-deps.diff
 ExclusiveArch:	x86_64
 
 BuildRequires:	rust-packaging
@@ -30,9 +32,9 @@ control and data paths such as OpenVSwitch.
 
 %prep
 %if 0
-%autosetup -n %{name}-%{version}
+%autosetup -n %{name}-%{version} -p1
 %else
-%autosetup -n %{name}-%{commit}
+%autosetup -n %{name}-%{commit} -p1
 %endif
 %cargo_prep
 
