@@ -48,6 +48,9 @@ make release %{?_smp_mflags}
 env CARGO_INSTALL_OPTS=--no-track %make_install
 install -m 0755 -d %{buildroot}%{_sysconfdir}/retis/profiles
 install -m 0644 retis/profiles/* %{buildroot}%{_sysconfdir}/retis/profiles
+rm -rf %{buildroot}/include
+rm -rf %{buildroot}/pkgconfig
+rm -f %{buildroot}/libbpf.a
 
 %files
 %license retis/LICENSE
