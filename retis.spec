@@ -59,5 +59,5 @@ rm -f %{buildroot}/libbpf.a
 %{_sysconfdir}/retis/profiles
 
 %changelog
-* Mon Apr 29 2024 Antoine Tenart <atenart@redhat.com> - 1.4.0-0
+* Tue Jul 02 2024 Antoine Tenart <atenart@redhat.com> - 1.5.0-0
 - Initial release.
