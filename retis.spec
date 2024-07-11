@@ -18,13 +18,11 @@ ExclusiveArch:	x86_64
 
 BuildRequires:	rust-packaging
 BuildRequires:	clang
-BuildRequires:	curl
 BuildRequires:	elfutils-libelf-devel
 BuildRequires:	jq
 BuildRequires:	libpcap-devel
 BuildRequires:	llvm
 BuildRequires:	make
-BuildRequires:	zlib-devel
 
 %description
 Tracing packets in the Linux networking stack, using eBPF and interfacing with
