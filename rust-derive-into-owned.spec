@@ -12,6 +12,8 @@ Summary:        Custom derives to help with types containing Cow fields
 License:        MIT
 URL:            https://crates.io/crates/derive-into-owned
 Source:         %{crates_source}
+# https://github.com/koivunej/derive-into-owned/issues/19
+Source:         https://github.com/koivunej/derive-into-owned/raw/master/LICENSE
 
 BuildRequires:  cargo-rpm-macros >= 24
 
@@ -30,7 +32,6 @@ This package contains library source intended for building other packages which
 use the "%{crate}" crate.
 
 %files          devel
-# FIXME: no license files detected
 %doc %{crate_instdir}/CHANGELOG.md
 %doc %{crate_instdir}/README.md
 %{crate_instdir}/

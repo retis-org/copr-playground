@@ -31,6 +31,7 @@ use the "%{crate}" crate.
 
 %files          devel
 # FIXME: no license files detected
+# https://github.com/courvoif/byteorder_slice/pull/4
 %doc %{crate_instdir}/README.md
 %{crate_instdir}/
 
