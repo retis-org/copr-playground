@@ -5,7 +5,7 @@
 %global crate btf-rs
 
 Name:           rust-btf-rs
-Version:        1.1.0
+Version:        1.1.1
 Release:        %autorelease
 Summary:        Library for the BPF type format (BTF)
 
