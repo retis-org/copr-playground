@@ -12,6 +12,8 @@ Summary:        Byteorder like crate for &[u8]
 License:        MIT
 URL:            https://crates.io/crates/byteorder_slice
 Source:         %{crates_source}
+# Add license text as this is missing upstream
+Patch:          byteorder_slice-add-mit-license-file.diff
 
 BuildRequires:  cargo-rpm-macros >= 24
 
@@ -30,8 +32,7 @@ This package contains library source intended for building other packages which
 use the "%{crate}" crate.
 
 %files          devel
-# FIXME: no license files detected
-# https://github.com/courvoif/byteorder_slice/pull/4
+%license %{crate_instdir}/LICENSE
 %doc %{crate_instdir}/README.md
 %{crate_instdir}/
 
