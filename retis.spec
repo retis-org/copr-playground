@@ -5,35 +5,29 @@ Summary:	Tracing packets in the Linux networking stack
 License:	GPLv2
 
 URL:		https://github.com/retis-org/retis
-%if 0
 Source:		https://github.com/retis-org/retis/archive/v%{version}/%{name}-%{version}.tar.gz
-%else
-%global commit 7777b074a5c7785484460250044fcc6f385b91b5
-Source:		https://github.com/retis-org/retis/archive/%{commit}/%{name}-%{commit}.tar.gz
-%endif
 
 Patch0:		retis-drop-rbpf.diff
 Patch1:		retis-drop-dev-deps.diff
-ExclusiveArch:	x86_64
+ExclusiveArch:	x86_64 aarch64
 
 BuildRequires:	rust-packaging
 BuildRequires:	clang
 BuildRequires:	elfutils-libelf-devel
+BuildRequires:	git
 BuildRequires:	jq
 BuildRequires:	libpcap-devel
 BuildRequires:	llvm
 BuildRequires:	make
+BuildRequires:	python3-devel
+BuildRequires:	zlib-devel
 
 %description
 Tracing packets in the Linux networking stack, using eBPF and interfacing with
 control and data paths such as OpenVSwitch.
 
 %prep
-%if 0
 %autosetup -n %{name}-%{version} -p1
-%else
-%autosetup -n %{name}-%{commit} -p1
-%endif
 %cargo_prep
 
 %generate_buildrequires
@@ -57,5 +51,4 @@ rm -f %{buildroot}/libbpf.a
 %{_sysconfdir}/retis/profiles
 
 %changelog
-* Tue Jul 02 2024 Antoine Tenart <atenart@redhat.com> - 1.5.0-0
-- Initial release.
+%autochangelog
