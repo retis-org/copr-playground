@@ -8,6 +8,7 @@ URL:		https://github.com/retis-org/retis
 Source:		https://github.com/retis-org/retis/archive/v%{version}/%{name}-%{version}.tar.gz
 
 Patch0:		retis-drop-dev-debug-deps.diff
+Patch1:		retis-fix-deps.diff
 ExclusiveArch:	x86_64 aarch64
 
 BuildRequires:	rust-packaging

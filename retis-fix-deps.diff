@@ -1,0 +1,20 @@
+--- a/retis/Cargo.toml
++++ b/retis/Cargo.toml
+@@ -39,7 +39,7 @@ elf = "0.7"
+ events = {version = "1.4", path = "../retis-events", package="retis-events" }
+ flate2 = "1.0"
+ libbpf-rs = "0.24"
+-libbpf-sys = "1.5"
++libbpf-sys = "1.4"
+ libc = "0.2"
+ log = { version = "0.4", features = ["std"] }
+ memoffset = "0.9"
+@@ -63,7 +63,7 @@ time = { version = "0.3", features = ["formatting", "macros"] }
+ thiserror = "2.0"
+ 
+ [build-dependencies]
+-bindgen = "0.70"
++bindgen = "0.69"
+ libbpf-cargo = "0.24"
+ libbpf-sys = "1.5"
+ memmap2 = "0.9"
