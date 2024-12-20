@@ -7,8 +7,7 @@ License:	GPLv2
 URL:		https://github.com/retis-org/retis
 Source:		https://github.com/retis-org/retis/archive/v%{version}/%{name}-%{version}.tar.gz
 
-Patch0:		retis-drop-rbpf.diff
-Patch1:		retis-drop-dev-deps.diff
+Patch0:		retis-drop-dev-debug-deps.diff
 ExclusiveArch:	x86_64 aarch64
 
 BuildRequires:	rust-packaging
