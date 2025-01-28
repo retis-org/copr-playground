@@ -1,13 +1,17 @@
 Name:		retis
-Version:	1.5.0
+Version:	1.5.1
 Release:	0%{?dist}
 Summary:	Tracing packets in the Linux networking stack
 License:	GPLv2
 
 URL:		https://github.com/retis-org/retis
 Source:		https://github.com/retis-org/retis/archive/v%{version}/%{name}-%{version}.tar.gz
+# Manually created to:
+# - Remove the rbpf dependency (was in the unused 'debug' feature).
+# - Remove the dev-dependencies.
+# - Relax the bindgen version requirement to allow using the one packaged in Fedora.
+Patch:		retis-fix-deps.diff
 
-Patch0:		retis-drop-dev-debug-deps.diff
 ExclusiveArch:	x86_64 aarch64
 
 BuildRequires:	rust-packaging

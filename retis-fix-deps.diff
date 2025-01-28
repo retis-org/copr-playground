@@ -17,7 +17,12 @@
  regex = "1.7"
  retis-derive = {version = "1.4", path = "../retis-derive"}
  serde = {version = "1.0", features = ["derive"]}
-@@ -67,9 +66,3 @@ bindgen = "0.70"
+@@ -63,13 +62,7 @@ time = { version = "0.3", features = ["formatting", "macros"] }
+ thiserror = "2.0"
+ 
+ [build-dependencies]
+-bindgen = "0.70"
++bindgen = "0.69"
  libbpf-cargo = "0.24"
  libbpf-sys = "1.5"
  memmap2 = "0.9"
