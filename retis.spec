@@ -10,6 +10,7 @@ Source:		https://github.com/retis-org/retis/archive/v%{version}/%{name}-%{versio
 # - Remove the rbpf dependency (was in the unused 'debug' feature).
 # - Remove the dev-dependencies.
 # - Relax the bindgen version requirement to allow using the one packaged in Fedora.
+# - Relax the dependency on cargo-platform (only required for c8s).
 Patch:		retis-fix-deps.diff
 
 ExclusiveArch:	x86_64 aarch64
