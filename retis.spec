@@ -12,6 +12,9 @@ Source:		https://github.com/retis-org/retis/archive/v%{version}/%{name}-%{versio
 # - Relax the bindgen version requirement to allow using the one packaged in Fedora.
 # - Relax the dependency on cargo-platform (only required for c8s).
 Patch:		retis-fix-deps.diff
+# Manually created to remove CFLAGS for BPF targets as the default ones are
+# incompatible with the bpf target (e.g. -mtls-dialect=gnu or -mbranch-protection).
+Patch:		retis-cflags.diff
 
 ExclusiveArch:	x86_64 aarch64
 
