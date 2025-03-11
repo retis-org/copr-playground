@@ -13,8 +13,11 @@ Source:		https://github.com/retis-org/retis/archive/v%{version}/%{name}-%{versio
 # - Relax the dependency on cargo-platform (only required for c8s).
 Patch:		retis-fix-deps.diff
 # Manually created to remove CFLAGS for BPF targets as the default ones are
-# incompatible with the bpf target (e.g. -mtls-dialect=gnu or -mbranch-protection).
+# incompatible with the 'bpf' target (e.g. -mtls-dialect=gnu or -mbranch-protection).
 Patch:		retis-cflags.diff
+# Manually created to fix a build error linked to using libbpf-rs 0.24.4, which is
+# not reproducible upstream while using newer versions.
+Patch:		retis-libbpf-rs-fix.diff
 
 ExclusiveArch:	x86_64 aarch64
 

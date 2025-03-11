@@ -1,0 +1,22 @@
+--- a/retis/src/core/probe/kernel/raw_tracepoint.rs
++++ b/retis/src/core/probe/kernel/raw_tracepoint.rs
+@@ -66,7 +66,7 @@ impl<'a> ProbeBuilder for RawTracepointBuilder<'a> {
+         reuse_map_fds(skel.open_object_mut(), &self.map_fds)?;
+ 
+         let skel = SkelStorage::load(skel)?;
+-        let prog = skel
++        let mut prog = skel
+             .object()
+             .progs_mut()
+             .find(|p| p.name() == "probe_raw_tracepoint")
+--- a/retis/src/core/probe/user/usdt.rs
++++ b/retis/src/core/probe/user/usdt.rs
+@@ -53,7 +53,7 @@ impl<'a> ProbeBuilder for UsdtBuilder<'a> {
+         reuse_map_fds(skel.open_object_mut(), &self.map_fds)?;
+ 
+         let skel = SkelStorage::load(skel)?;
+-        let prog = skel
++        let mut prog = skel
+             .object()
+             .progs_mut()
+             .find(|p| p.name() == "probe_usdt")
