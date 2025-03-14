@@ -47,7 +47,7 @@ control and data paths such as OpenVSwitch.
 make release %{?_smp_mflags}
 
 %install
-env CARGO_INSTALL_OPTS=--no-track %make_install
+env CARGO_INSTALL_OPTS="--no-track --profile rpm" %make_install
 install -m 0755 -d %{buildroot}%{_sysconfdir}/retis/profiles
 install -m 0644 retis/profiles/* %{buildroot}%{_sysconfdir}/retis/profiles
 rm -rf %{buildroot}/include
