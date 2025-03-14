@@ -21,16 +21,17 @@ Patch:		retis-libbpf-rs-fix.diff
 
 ExclusiveArch:	x86_64 aarch64
 
+Requires:	elfutils-libelf
+Requires:	python3
+Requires:	zlib
+
 BuildRequires:	rust-packaging
 BuildRequires:	clang
-BuildRequires:	elfutils-libelf-devel
 BuildRequires:	git
 BuildRequires:	jq
-BuildRequires:	libpcap-devel
 BuildRequires:	llvm
 BuildRequires:	make
 BuildRequires:	python3-devel
-BuildRequires:	zlib-devel
 
 %description
 Tracing packets in the Linux networking stack, using eBPF and interfacing with
@@ -44,7 +45,7 @@ control and data paths such as OpenVSwitch.
 %cargo_generate_buildrequires
 
 %build
-make release %{?_smp_mflags}
+env CARGO_CMD_OPTS="--profile rpm" make %{?_smp_mflags}
 
 %install
 env CARGO_INSTALL_OPTS="--no-track --profile rpm" %make_install
