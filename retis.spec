@@ -21,11 +21,17 @@ Patch:		retis-libbpf-rs-fix.diff
 
 ExclusiveArch:	x86_64 aarch64
 
+Requires:	elfutils-libelf
+Requires:	python3
+Requires:	libpcap
+Requires:	zlib
+
 BuildRequires:	rust-packaging
 BuildRequires:	clang
 BuildRequires:	elfutils-libelf-devel
 BuildRequires:	git
 BuildRequires:	jq
+BuildRequires:	libbpf-devel
 BuildRequires:	libpcap-devel
 BuildRequires:	llvm
 BuildRequires:	make
