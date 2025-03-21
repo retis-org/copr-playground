@@ -2,7 +2,7 @@ Name:		retis
 Version:	1.5.2
 Release:	0%{?dist}
 Summary:	Tracing packets in the Linux networking stack
-License:	GPLv2
+License:	GPL-2.0-only
 
 URL:		https://github.com/retis-org/retis
 Source:		https://github.com/retis-org/retis/archive/v%{version}/%{name}-%{version}.tar.gz
