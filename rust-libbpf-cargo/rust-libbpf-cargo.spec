@@ -5,7 +5,7 @@
 %global crate libbpf-cargo
 
 Name:           rust-libbpf-cargo
-Version:        0.25.0
+Version:        0.26.0
 Release:        %autorelease
 Summary:        Cargo plugin to build bpf programs
 
