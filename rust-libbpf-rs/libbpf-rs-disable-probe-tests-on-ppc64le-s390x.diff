@@ -1,0 +1,26 @@
+diff --git a/tests/test.rs b/tests/test.rs
+index 523cd55..9efc179 100644
+--- a/tests/test.rs
++++ b/tests/test.rs
+@@ -1525,6 +1525,10 @@ fn test_object_map_handle_clone() {
+     );
+ }
+ 
++#[cfg(not(any(
++    all(target_arch = "powerpc64", target_endian = "little"),
++    target_arch = "s390x"
++)))]
+ #[tag(root)]
+ #[test]
+ fn test_object_usdt() {
+@@ -1551,6 +1555,10 @@ fn test_object_usdt() {
+     assert_eq!(result, 1);
+ }
+ 
++#[cfg(not(any(
++    all(target_arch = "powerpc64", target_endian = "little"),
++    target_arch = "s390x"
++)))]
+ #[tag(root)]
+ #[test]
+ fn test_object_usdt_cookie() {

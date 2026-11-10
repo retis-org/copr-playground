@@ -1,0 +1,14 @@
+[package]
+cargo-toml-patch-comments = [
+    "drop pinned version for indirect libbpf-sys dependency",
+]
+
+[requires]
+build = ["clang", "rustfmt"]
+bin = ["clang", "rustfmt"]
+lib = ["clang", "rustfmt"]
+
+[tests]
+run = false
+comments = ["tests can only be run in-tree"]
+

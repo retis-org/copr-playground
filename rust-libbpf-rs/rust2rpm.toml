@@ -1,0 +1,27 @@
+[package]
+cargo-toml-patch-comments = [
+  "bump probe from 0.3 to 0.5",
+]
+
+
+[[package.extra-patches]]
+number = 10
+file = "libbpf-rs-disable-probe-tests-on-ppc64le-s390x.diff"
+comments = [
+  "probe needs feature(asm_experimental_arch) on ppc64le and s390x",
+  "https://github.com/rust-lang/rust/issues/93335",
+  "https://github.com/libbpf/libbpf-rs/pull/944",
+]
+
+[tests]
+comments = [
+  "tests tagged as \"root\" fail, RLIMIT_MEMLOCK does not work in mock",
+  "tests loading tests/bin/runqslower.bpf.o fail, as it's not built"
+]
+skip = [
+  ":root:",
+  "test_object_build_from_memory",
+  "test_object_build_from_memory_empty_name",
+  "test_object_name",
+  "test_object_link_files",
+]

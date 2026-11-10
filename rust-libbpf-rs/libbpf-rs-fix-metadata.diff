@@ -1,0 +1,11 @@
+--- libbpf-rs-0.25.0/Cargo.toml	1970-01-01T00:00:01+00:00
++++ libbpf-rs-0.25.0/Cargo.toml	2026-01-23T20:45:14.118246+00:00
+@@ -107,7 +107,7 @@
+ version = "0.2.3"
+ 
+ [dev-dependencies.probe]
+-version = "0.3"
++version = "0.5"
+ 
+ [dev-dependencies.scopeguard]
+ version = "1.1"

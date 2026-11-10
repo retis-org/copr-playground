@@ -1,0 +1,22 @@
+[package]
+license-files.exclude = ["elfutils/**", "zlib/**"]
+
+[requires]
+build = [
+  "elfutils-libelf-devel",
+  "kernel-headers",
+  "zlib-devel",
+]
+
+lib = [
+  "elfutils-libelf-devel",
+  "kernel-headers",
+  "zlib-devel",
+]
+
+[scripts.prep]
+pre = [
+  # use system libs instead
+  "rm -rf elfutils zlib",
+]
+
