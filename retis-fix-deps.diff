@@ -1,48 +1,50 @@
-diff -Naur a/retis/Cargo.toml b/retis/Cargo.toml
---- a/retis/Cargo.toml	2025-10-07 12:09:19.000000000 +0200
-+++ b/retis/Cargo.toml	2026-01-30 15:52:21.059781567 +0100
-@@ -24,7 +24,7 @@
+--- a/retis/Cargo.toml	2026-10-15 09:23:13.914423783 +0200
++++ b/Eetis/Cargo.toml	2026-10-15 10:12:26.788105424 +0200
+@@ -23,7 +23,7 @@
+ python = ["retis-derive/python", "events/python-shell"]
  test_bindgen_layout = []
- test_cap_bpf = []
  benchmark = []
 -debug = ["dep:rbpf"]
 +debug = []
  
  [dependencies]
  anyhow = "1.0"
-@@ -38,7 +38,7 @@
+@@ -37,8 +37,8 @@
  elf = "0.8"
  events = {version = "1.5", path = "../retis-events", package="retis-events" }
  flate2 = "1.0"
--libbpf-rs = "=0.26.0-beta.1"
-+libbpf-rs = "0.25"
- libbpf-sys = "1.6"
+-libbpf-rs = "0.27"
+-libbpf-sys = "1.7"
++libbpf-rs = "0.26"
++libbpf-sys = "1.6"
  libc = "0.2"
  log = { version = "0.4", features = ["std"] }
-@@ -47,12 +47,11 @@
+ memoffset = "0.9"
+@@ -46,12 +46,11 @@
  once_cell = "1.15"
  ovs-unixctl = { version = "0.1.0" }
  pager = "0.16"
 -pcap = "2.2"
 +pcap = "1.3"
- pcap-file = "2.0"
+ pcap-file = "=3.0.0-rc.3"
  pest = "2.7"
  pest_derive = "2.7"
  plain = "0.2"
--rbpf = {version = "0.3", optional = true}
+-rbpf = {version = "0.4", optional = true}
  regex = "1.7"
  retis-derive = {version = "1.5", path = "../retis-derive"}
  serde = {version = "1.0", features = ["derive"]}
-@@ -66,11 +65,5 @@
+@@ -66,12 +65,7 @@
  
  [build-dependencies]
  bindgen = "0.72"
--libbpf-cargo = "=0.26.0-beta.1"
-+libbpf-cargo = "0.25"
+-libbpf-cargo = "0.27"
++libbpf-cargo = "0.26"
  memmap2 = "0.9"
--
--[dev-dependencies]
+ 
+ [dev-dependencies]
 -probe = "0.5"
--serial_test = "3.1"
+-rbpf = "0.4"
+-serial_test = "4.0"
 -test-case = "3.2"
 -events = {version = "1.5", path = "../retis-events", package="retis-events", features = ["test-events"]}

@@ -1,10 +1,9 @@
-diff -Naur a/Makefile b/Makefile
---- a/Makefile	2026-01-30 15:19:53.373271006 +0100
-+++ b/Makefile	2026-01-30 15:20:08.956452996 +0100
-@@ -133,7 +133,7 @@
- 	$(call build,build,building retis (debug))
+--- a/Makefile	2026-08-07 11:01:17.000000000 +0200
++++ b/Makefile	2026-10-14 13:26:29.152823880 +0200
+@@ -146,7 +146,7 @@
  
  release: ebpf
+ 	$(eval $(call retis_set_version))
 -	$(call build,build --release,building retis (release),$(RELEASE_FLAGS))
 +	$(call build,build --profile rpm,building retis (release),$(RELEASE_FLAGS))
  

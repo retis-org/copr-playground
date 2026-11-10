@@ -1,5 +1,7 @@
+%global wireshark_plugindir %(pkg-config --variable plugindir wireshark 2>/dev/null)/epan
+
 Name:           retis
-Version:        1.6.4
+Version:        1.7.0
 Release:        %autorelease
 Summary:        Tracing packets in the Linux networking stack
 SourceLicense:  GPL-2.0-only
@@ -46,15 +48,13 @@ Patch:          retis-release-profile.diff
 # - Remove the dev-dependencies.
 # - Downgrade the libbpf-rs/cargo and pcap dependencies.
 Patch:          retis-fix-deps.diff
-# dep: bump pyo3 to 0.29
-# https://github.com/retis-org/retis/commit/6e39a020ce8b3ca68163423e143e951a39929c87
-# cherry-picked on v1.6.4, without changes to Cargo.lock
-Patch:          0001-dep-bump-pyo3-to-0.29.patch
 
 ExclusiveArch:  x86_64 aarch64
 
 Requires:       python3
 
+BuildRequires:  wireshark-devel
+BuildRequires:  json-c-devel
 BuildRequires:  rust-packaging
 BuildRequires:  clang
 BuildRequires:  git
@@ -76,6 +76,7 @@ control and data paths such as OpenVSwitch.
 
 %build
 make release %{?_smp_mflags}
+make wireshark %{?_smp_mflags}
 %cargo_license_summary
 %{cargo_license} > LICENSE.dependencies
 
@@ -83,15 +84,30 @@ make release %{?_smp_mflags}
 env CARGO_INSTALL_OPTS="--no-track" make install
 install -m 0755 -d %{buildroot}%{_datadir}/retis/profiles
 install -m 0644 retis/profiles/* %{buildroot}%{_datadir}/retis/profiles
+install -m 0755 -d %{buildroot}%{wireshark_plugindir}
+install -m 0755 tools/wireshark/retis.so %{buildroot}%{wireshark_plugindir}/retis.so
 rm -rf %{buildroot}/include
 rm -rf %{buildroot}/pkgconfig
 rm -f %{buildroot}/libbpf.a
+
+%package -n retis-wireshark
+Summary:        Wireshark dissector plugin for retis pcap files
+Requires:       retis = %{version}-%{release}
+Requires:       wireshark
+
+%description -n retis-wireshark
+A Wireshark dissector plugin that decodes retis pcap capture files,
+providing human-readable display of retis events inside Wireshark.
 
 %files
 %license LICENSE LICENSE.dependencies
 %doc README.md
 %{_bindir}/retis
 %{_datadir}/retis/profiles
+
+%files -n retis-wireshark
+%license LICENSE
+%{wireshark_plugindir}/retis.so
 
 %changelog
 %autochangelog
