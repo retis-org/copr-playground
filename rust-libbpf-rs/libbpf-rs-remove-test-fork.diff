@@ -1,0 +1,29 @@
+--- a/tests/test_print.rs
++++ b/tests/test_print.rs
+@@ -12,10 +12,7 @@
+ use libbpf_rs::PrintCallback;
+ use libbpf_rs::PrintLevel;
+ 
+-use test_fork::fork;
+-
+ 
+-#[fork]
+ #[test]
+ fn test_set_print() {
+     static CORRECT_LEVEL: AtomicBool = AtomicBool::new(false);
+@@ -42,7 +39,6 @@
+     assert!(correct_message, "Did not capture the correct message");
+ }
+ 
+-#[fork]
+ #[test]
+ fn test_set_restore_print() {
+     fn callback1(_: PrintLevel, _: String) {
+@@ -61,7 +57,6 @@
+     assert_eq!(prev, Some((PrintLevel::Debug, callback2 as PrintCallback)));
+ }
+ 
+-#[fork]
+ #[test]
+ fn test_set_and_save_print() {
+     fn callback1(_: PrintLevel, _: String) {

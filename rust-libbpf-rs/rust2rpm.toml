@@ -1,6 +1,7 @@
 [package]
 cargo-toml-patch-comments = [
   "bump probe from 0.3 to 0.5",
+  "remove test-fork dependency (not available in Fedora)",
 ]
 
 
@@ -11,6 +12,13 @@ comments = [
   "probe needs feature(asm_experimental_arch) on ppc64le and s390x",
   "https://github.com/rust-lang/rust/issues/93335",
   "https://github.com/libbpf/libbpf-rs/pull/944",
+]
+
+[[package.extra-patches]]
+number = 20
+file = "libbpf-rs-remove-test-fork.diff"
+comments = [
+  "remove test-fork usage (crate not available in Fedora)",
 ]
 
 [tests]
@@ -24,4 +32,7 @@ skip = [
   "test_object_build_from_memory_empty_name",
   "test_object_name",
   "test_object_link_files",
+  "test_set_print",
+  "test_set_restore_print",
+  "test_set_and_save_print",
 ]

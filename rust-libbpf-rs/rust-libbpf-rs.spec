@@ -5,7 +5,7 @@
 %global crate libbpf-rs
 
 Name:           rust-libbpf-rs
-Version:        0.25.0
+Version:        0.26.0
 Release:        %autorelease
 Summary:        Libbpf-rs is a safe, idiomatic, and opinionated wrapper around libbpf-sys
 
@@ -14,11 +14,14 @@ URL:            https://crates.io/crates/libbpf-rs
 Source:         %{crates_source}
 # Manually created patch for downstream crate metadata changes
 # * bump probe from 0.3 to 0.5
+# * remove test-fork dependency (not available in Fedora)
 Patch:          libbpf-rs-fix-metadata.diff
 # * probe needs feature(asm_experimental_arch) on ppc64le and s390x
 # * https://github.com/rust-lang/rust/issues/93335
 # * https://github.com/libbpf/libbpf-rs/pull/944
 Patch10:        libbpf-rs-disable-probe-tests-on-ppc64le-s390x.diff
+# * remove test-fork usage (crate not available in Fedora)
+Patch20:        libbpf-rs-remove-test-fork.diff
 
 BuildRequires:  cargo-rpm-macros >= 24
 
@@ -140,6 +143,9 @@ use the "vendored" feature of the "%{crate}" crate.
     --skip test_object_build_from_memory_empty_name
     --skip test_object_name
     --skip test_object_link_files
+    --skip test_set_print
+    --skip test_set_restore_print
+    --skip test_set_and_save_print
 }}
 %endif
 
