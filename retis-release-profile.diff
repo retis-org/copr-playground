@@ -1,6 +1,7 @@
---- a/Makefile
-+++ b/Makefile
-@@ -127,7 +127,7 @@ debug: ebpf
+diff -Naur a/Makefile b/Makefile
+--- a/Makefile	2026-01-30 15:19:53.373271006 +0100
++++ b/Makefile	2026-01-30 15:20:08.956452996 +0100
+@@ -133,7 +133,7 @@
  	$(call build,build,building retis (debug))
  
  release: ebpf

@@ -1,0 +1,116 @@
+From a3c4fd06c9a4646de2cf02838b613ffb58b01ef0 Mon Sep 17 00:00:00 2001
+From: Antoine Tenart <atenart@redhat.com>
+Date: Wed, 27 May 2026 12:17:56 +0200
+Subject: [PATCH] dep: bump pyo3 to 0.29
+
+- Type alias PyObject was removed (-> Py<PyAny>).
+- from_py_object is opt-in in the pyclass derive.
+- Python::with_gil() was removed and replaced by Python::attach().
+- downcast_into() was deprecated in favor of Bound::cast_into().
+
+Signed-off-by: Antoine Tenart <atenart@redhat.com>
+---
+ retis-derive/src/lib.rs          | 4 ++--
+ retis-events/Cargo.toml          | 2 +-
+ retis-events/src/packet.rs       | 2 +-
+ retis-events/src/python.rs       | 8 ++++----
+ retis-events/src/python_embed.rs | 2 +-
+ 5 files changed, 9 insertions(+), 9 deletions(-)
+
+diff --git a/retis-derive/src/lib.rs b/retis-derive/src/lib.rs
+index 0c9291c..dae45f4 100644
+--- a/retis-derive/src/lib.rs
++++ b/retis-derive/src/lib.rs
+@@ -68,7 +68,7 @@ pub fn event_type(
+ ) -> proc_macro::TokenStream {
+     let input: Item = parse_macro_input!(item);
+     let props = item_get_props(&input);
+-    let mut pyclass_args = Vec::new();
++    let mut pyclass_args = vec![quote!(from_py_object)];
+     let mut derives = vec![
+         quote!(Clone),
+         quote!(Debug),
+@@ -97,7 +97,7 @@ pub fn event_type(
+         #[cfg_attr(feature = "python", pyo3::pymethods)]
+         #[cfg(feature = "python")]
+         impl #ident {
+-            pub(crate) fn to_dict(&self, py: pyo3::Python<'_>) -> pyo3::PyObject {
++            pub(crate) fn to_dict(&self, py: pyo3::Python<'_>) -> pyo3::Py<pyo3::PyAny> {
+                 crate::python::to_pyobject(&serde_json::json!(self), py)
+             }
+ 
+diff --git a/retis-events/Cargo.toml b/retis-events/Cargo.toml
+index a990ac5..6a37517 100644
+--- a/retis-events/Cargo.toml
++++ b/retis-events/Cargo.toml
+@@ -23,7 +23,7 @@ log = { version = "0.4", features = ["std"] }
+ once_cell = "1.15"
+ retis-derive = {version = "1.4", path = "../retis-derive"}
+ retis-pnet = {version = "1.5", path = "../retis-pnet"}
+-pyo3 = {version = "0.25", features = ["multiple-pymethods"], optional = true}
++pyo3 = {version = "0.29", features = ["multiple-pymethods"], optional = true}
+ semver = "1.0"
+ serde = {version = "1.0", features = ["derive"]}
+ serde_json = "1.0"
+diff --git a/retis-events/src/packet.rs b/retis-events/src/packet.rs
+index cfa1dac..7e5c38d 100644
+--- a/retis-events/src/packet.rs
++++ b/retis-events/src/packet.rs
+@@ -47,7 +47,7 @@ impl EventFmt for PacketEvent {
+ /// We don't use #[event_type] as we're implementing serde::Serialize and
+ /// serde::Deserialize manually.
+ #[derive(Clone, Debug)]
+-#[cfg_attr(feature = "python", pyclass)]
++#[cfg_attr(feature = "python", pyclass(from_py_object))]
+ pub struct RawPacket(pub Vec<u8>);
+ 
+ impl serde::Serialize for RawPacket {
+diff --git a/retis-events/src/python.rs b/retis-events/src/python.rs
+index 3f66e0a..9f75e11 100644
+--- a/retis-events/src/python.rs
++++ b/retis-events/src/python.rs
+@@ -97,7 +97,7 @@ impl PyEvent {
+     ///
+     /// Returns a dictionary with all key<>data stored (recursively) in the
+     /// event, eg. `e.to_dict()['skb']['dev']`.
+-    fn to_dict(&self, py: Python<'_>) -> PyObject {
++    fn to_dict(&self, py: Python<'_>) -> Py<PyAny> {
+         self.0.borrow(py).to_dict(py)
+     }
+ 
+@@ -109,7 +109,7 @@ impl PyEvent {
+             &CString::new("[v for v in dir(event) if getattr(event,v) and not callable(getattr(event,v)) and not v.startswith('__')]")?,
+             Some(&globals),
+             None,
+-        )?.downcast_into()?.unbind())
++        )?.cast_into()?.unbind())
+     }
+ }
+ 
+@@ -362,8 +362,8 @@ impl PyEventFile {
+     }
+ }
+ 
+-/// Converts a serde_json::Value to a PyObject.
+-pub(crate) fn to_pyobject(val: &serde_json::Value, py: Python<'_>) -> PyObject {
++/// Converts a serde_json::Value to a Py<PyAny>.
++pub(crate) fn to_pyobject(val: &serde_json::Value, py: Python<'_>) -> Py<PyAny> {
+     use serde_json::Value;
+     match val {
+         Value::Null => py.None(),
+diff --git a/retis-events/src/python_embed.rs b/retis-events/src/python_embed.rs
+index 7e46e6a..60321fb 100644
+--- a/retis-events/src/python_embed.rs
++++ b/retis-events/src/python_embed.rs
+@@ -26,7 +26,7 @@ pub fn shell_execute(file: PathBuf, script: Option<&PathBuf>, args: &[String]) -
+         None => Vec::new(),
+     };
+ 
+-    Python::with_gil(|py| -> PyResult<()> {
++    Python::attach(|py| -> PyResult<()> {
+         let shell = PyShell::new(py, event_file)?;
+         if let Some(script) = script {
+             let script = fs::read_to_string(script)?;
+-- 
+2.55.0
+
